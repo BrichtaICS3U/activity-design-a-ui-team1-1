@@ -48,6 +48,14 @@ fontTitleBLue = pygame.font.Font('freesansbold.ttf', 5)
 textSurfaceTitleBLue = fontTitle.render('QUIT!', True, BLACK) 
 textRectTitleBLue = textSurfaceTitleBLue.get_rect()
 textRectTitleBLue.center = (400, 480)
+
+
+
+
+def my_next_function():
+    global level
+    level += 1
+    
 # This loop will continue until the user exits the game
 carryOn = True
 
@@ -85,7 +93,7 @@ while carryOn:
     elif SCREENWIDTH/2-50 < mouse[0] < SCREENWIDTH/2+50 and SCREENHEIGHT/4 < mouse[1] < SCREENHEIGHT/4 + 50:
         pygame.draw.rect(screen, BRIGHT_RED, (SCREENWIDTH/2-50, SCREENHEIGHT/4, 100, 50))
     else:
-        pygame.draw.rect(screen, RED, (SCREENWIDTH/2-50, SCREENHEIGHT/4, 100, 50))
+        pygame.draw.rect(screen, RED,(SCREENWIDTH/2-50, SCREENHEIGHT/4, 100, 50))
 
     # GREEN button
     if SCREENWIDTH/2-50 < mouse[0] < SCREENWIDTH/2+50 and SCREENHEIGHT*2/4 < mouse[1] < SCREENHEIGHT*2/4 + 50 and click[0] == 1:
@@ -110,6 +118,8 @@ while carryOn:
     screen.blit(textSurfaceTitleRed, textRectTitleRed)
     screen.blit(textSurfaceTitleBLue, textRectTitleBLue)
     screen.blit(textSurfaceTitle, textRectTitle)
+
+    
 
     # Update the screen with queued shapes
     pygame.display.flip()
