@@ -31,7 +31,7 @@ class Button():
        font_name = name of font
        font_size = size of font
     """
-    def __init__(self, txt, location, action, bg=WHITE, fg=BLACK, size=(SCREENWIDTH/2, SCREENHEIGHT/4), font_name="Segoe Print", font_size=30):
+    def __init__(self, txt, location, action, bg=WHITE, fg=BLACK, size=(100, 40), font_name="Segoe Print", font_size=16):
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
@@ -109,7 +109,14 @@ carryOn = True
 clock = pygame.time.Clock()
 
 #create button objects
-button_01 = Button("PLAY", (SCREENWIDTH/2, SCREENHEIGHT/4), my_next_function, bg=RED)
+fontTitle = pygame.font.Font('freesansbold.ttf', 18)
+textSurfaceTitle = fontTitle.render('My Awesome Game!', True, BLACK) 
+textRectTitle = textSurfaceTitle.get_rect()
+textRectTitle.center = (400,100)  
+
+
+
+button_01 = Button("HELLO", (SCREENWIDTH/2, SCREENHEIGHT/4), my_next_function, bg=RED)
 button_02 = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT/4), my_previous_function)
 button_04 = Button("SETTINGS", (SCREENWIDTH/2, SCREENHEIGHT*2/4),my_settings_function, bg=GREEN)
 button_03 = Button("QUIT", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=Blue)
@@ -130,6 +137,7 @@ while carryOn:
     # --- Game logic goes here
 
     # --- Draw code goes here
+    screen.blit(textSurfaceTitle,textRectTitle)
 
     # Clear the screen to white
     screen.fill(WHITE)
