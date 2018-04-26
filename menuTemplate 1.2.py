@@ -20,6 +20,13 @@ SCREENHEIGHT = 533
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
+
+
+pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+pygame.mixer.music.load('A Walk in the Forest - Relax Music and Nature Sounds.mp3')
+pygame.mixer.music.play(-1)
+
+
 class Button():
     """This is a class for a generic button.
     
@@ -65,6 +72,9 @@ class Button():
     def call_back(self):
         """Runs a function when clicked"""
         self.call_back_()
+        
+def my_hello():
+    print('hello')
 
 def my_shell_function():
     """A generic function that prints something in the shell"""
@@ -73,8 +83,7 @@ def my_shell_function():
 def my_next_function():
     """A function that advances to the next level"""
     global level
-    print('Hello!')
-    
+    level += 1
     
 def my_previous_function():
     """A function that retreats to the previous level"""
@@ -102,6 +111,10 @@ def mousebuttondown(level):
         for button in level3_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+def play_music():
+    pygame.mixer.music.unpause()
+def stop_music():
+    pygame.mixer.music.pause()
 
 level = 1
 
@@ -116,14 +129,19 @@ textRectTitle.center = (400,50)
 
 
 
-button_HELLO = Button("HELLO", (SCREENWIDTH/2, SCREENHEIGHT/4), my_next_function, bg=RED)
+button_HELLO = Button("HELLO", (SCREENWIDTH/2, SCREENHEIGHT/4), my_hello, bg=RED)
 button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT/4), my_previous_function,bg=RED)
 button_SETTINGS = Button("SETTINGS", (SCREENWIDTH/2, SCREENHEIGHT*2/4),my_next_function, bg=GREEN)
 button_QUIT = Button("QUIT", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=Blue)
+button_Sound = Button("Sound", (SCREENWIDTH/2, SCREENHEIGHT*2/4),my_next_function, bg=GREEN)
+button_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/4), play_music,bg=GREEN)
+button_OFF= Button("OFF", (SCREENWIDTH/2, SCREENHEIGHT*2/4),stop_music, bg=GREEN)
+button_Previous2 = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_previous_function,bg=RED)
 
 #arrange button groups depending on level
 level1_buttons = [button_HELLO,button_SETTINGS, button_QUIT]
-level2_buttons = [button_Previous]
+level2_buttons = [button_Previous2,button_Sound]
+level3_buttons = [button_ON,button_OFF,button_Previous2] 
 #---------Main Program Loop----------
 screen.blit(background, (0, 0))
 while carryOn:
@@ -150,6 +168,9 @@ while carryOn:
             button.draw()
     elif level == 2:
         for button in level2_buttons:
+            button.draw()
+    elif level == 3:
+        for button in level3_buttons:
             button.draw()
 
     # Update the screen with queued shapes
