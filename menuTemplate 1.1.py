@@ -31,7 +31,7 @@ class Button():
        font_name = name of font
        font_size = size of font
     """
-    def __init__(self, txt, location, action, bg=WHITE, fg=BLACK, size=(100, 40), font_name="Segoe Print", font_size=16):
+    def __init__(self, txt, location, action, bg=WHITE, fg=BLACK, size=(SCREENWIDTH/2, SCREENHEIGHT/4), font_name="Segoe Print", font_size=30):
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
@@ -64,6 +64,7 @@ class Button():
     def call_back(self):
         """Runs a function when clicked"""
         self.call_back_()
+        
 
 def my_shell_function():
     """A generic function that prints something in the shell"""
@@ -73,11 +74,9 @@ def my_next_function():
     """A function that advances to the next level"""
     global level
     level += 1
-    
-    
+
 def my_previous_function():
     """A function that retreats to the previous level"""
-    bg = RED
     global level
     level -= 1
 
@@ -107,21 +106,15 @@ carryOn = True
 clock = pygame.time.Clock()
 
 #create button objects
-fontTitle = pygame.font.Font('freesansbold.ttf', 18)
-textSurfaceTitle = fontTitle.render('My Awesome Game!', True, BLACK) 
-textRectTitle = textSurfaceTitle.get_rect()
-textRectTitle.center = (400,200)  
-
-
-
-button_HELLO = Button("HELLO", (SCREENWIDTH/2, SCREENHEIGHT/4), my_next_function, bg=RED)
-button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT/4), my_previous_function,bg=RED)
+button_PLAY = Button("PLAY", (SCREENWIDTH/2, SCREENHEIGHT/4),my_next_function,bg=RED)
+button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT/4), my_previous_function)
 button_SETTINGS = Button("SETTINGS", (SCREENWIDTH/2, SCREENHEIGHT*2/4),my_next_function, bg=GREEN)
 button_QUIT = Button("QUIT", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=Blue)
 
 #arrange button groups depending on level
-level1_buttons = [button_HELLO,button_SETTINGS, button_QUIT]
+level1_buttons = [button_PLAY,button_SETTINGS, button_QUIT]
 level2_buttons = [button_Previous]
+#level3_buttons = [button_02, button_03]
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -134,7 +127,6 @@ while carryOn:
     # --- Game logic goes here
 
     # --- Draw code goes here
-    screen.blit(textSurfaceTitle,textRectTitle)
 
     # Clear the screen to white
     screen.fill(WHITE)
