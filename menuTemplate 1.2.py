@@ -4,6 +4,7 @@
 import pygame, sys
 pygame.init()
 
+background = pygame.image.load("image.jpg")
 # Define some colours
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -15,7 +16,7 @@ BRIGHT_Blue = (135,212,223)
 Blue = (67,188,205)
 
 SCREENWIDTH = 800
-SCREENHEIGHT = 600
+SCREENHEIGHT = 533
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
@@ -72,7 +73,7 @@ def my_shell_function():
 def my_next_function():
     """A function that advances to the next level"""
     global level
-    level += 1
+    print('Hello!')
     
     
 def my_previous_function():
@@ -103,14 +104,15 @@ def mousebuttondown(level):
                 button.call_back()
 
 level = 1
+
 carryOn = True
 clock = pygame.time.Clock()
 
 #create button objects
-fontTitle = pygame.font.Font('freesansbold.ttf', 18)
-textSurfaceTitle = fontTitle.render('My Awesome Game!', True, BLACK) 
+fontTitle = pygame.font.Font('freesansbold.ttf', 26)
+textSurfaceTitle = fontTitle.render('My Awesome Game!', True, WHITE) 
 textRectTitle = textSurfaceTitle.get_rect()
-textRectTitle.center = (400,200)  
+textRectTitle.center = (400,50)  
 
 
 
@@ -123,6 +125,7 @@ button_QUIT = Button("QUIT", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function
 level1_buttons = [button_HELLO,button_SETTINGS, button_QUIT]
 level2_buttons = [button_Previous]
 #---------Main Program Loop----------
+screen.blit(background, (0, 0))
 while carryOn:
     # --- Main event loop ---
     for event in pygame.event.get(): # Player did something
@@ -134,10 +137,12 @@ while carryOn:
     # --- Game logic goes here
 
     # --- Draw code goes here
+    screen.fill(WHITE)
+    screen.blit(background, (0, 0))
     screen.blit(textSurfaceTitle,textRectTitle)
 
     # Clear the screen to white
-    screen.fill(WHITE)
+    
 
     # Draw buttons
     if level == 1:
